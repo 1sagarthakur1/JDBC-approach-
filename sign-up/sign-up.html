@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img{
+            display: flex;
+            justify-content: center;
+        }
+        #container{
+            height:550px;
+            width: 350px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content:space-around;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+        }
+        .inpu{
+            height:40px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+        .divse{
+            display: flex;
+            flex-direction: column;
+            /* align-items: center; */
+            margin-top: 25px;
+            text-align:left;
+            /* border: 1px solid black; */
+        }
+        .label{
+            color: gray;
+            font-weight: 700;
+        }
+        button{
+            height:40px;
+            width: 300px;
+            border-radius: 5px;
+            background-color: rgb(238, 230, 230);
+            border: 0px;
+        }
+        p{
+            font-size: 13px;
+            color: gray;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="img">
+       <img src="https://sso.masaischool.com/brand_dark.svg" alt="">
+    </div>
+    <div id="container">
+        <h2>Sign Up</h2>
+         <div class="divse">
+             <label for="" class="label">Full name</label>
+             <input class="inpu" id="name" type="text">
+         </div>
+         <div class="divse">
+            <label for="" class="label">Email</label>
+            <input class="inpu" id="email" type="email">
+        </div>
+        <div class="divse">
+            <label for="" class="label">Password</label>
+            <input class="inpu" id="pwd" type="password">
+        </div>
+        <p>By signing up, i accept the Masai Schoool <a href="">Terms of Service</a> and acknowledge the <a href="">Privacy Policy</a></p>
+        <button id="butn">SIGN UP</button>
+        <p>Alrady have an account?<a href="sign-in.html">Sing In</a></p>
+    </div>
+</body>
+</html>
+<script>
+    var arr ;
+
+    if(JSON.parse(localStorage.getItem("information"))==null){
+        arr=[];
+    }
+    else{
+        arr=JSON.parse(localStorage.getItem("information"))
+    }
+
+    
+    document.querySelector("#butn").addEventListener("click",forsignup)
+    function forsignup(){
+        var infor = JSON.parse(localStorage.getItem("information"))
+
+        var fname = document.querySelector("#name").value
+        var num = 0
+        if(fname == ""){
+            alert("please Enter name")
+        }
+        else{
+            var count = 0;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]==fname){
+                    // console.log(arr[i],fname)
+                    count++
+                    break;
+                }
+            }
+            console.log(count)
+            if(count==0){
+                 arr.push(fname)
+                 num++
+            }
+            else if(count>0){
+                alert("this name alrady in data")
+            }
+        }
+        console.log(num)
+        var femail = document.querySelector("#email").value
+        if(femail == ""){
+            alert("please Enter email")
+        }
+        else{
+            var count1 = 0;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]==femail){
+                    count1++
+                    break;
+                }
+            }
+            if(count1==0){
+                 arr.push(femail)
+                 num++
+
+            }
+            else{
+                alert("this email alrady in data")
+            }
+        }
+        var fpassw = document.querySelector("#pwd").value
+        if(fpassw == ""){
+            alert("please Enter password")
+        }
+        else{
+            var count2 = 0;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]==fpassw){
+                    count2++
+                    break;
+                }
+            }
+            if(count2==0){
+                 arr.push(fpassw)
+                 num++
+            }
+            else{
+                alert("this passwad alrady in data")
+            }
+        }
+        if(num==3){
+            localStorage.setItem("information",JSON.stringify(arr))
+            alert("Sing Up sucsses fully")
+            window.open("sign-in.html")
+        }
+
+        // console.log(arr.length)
+    }
+</script>

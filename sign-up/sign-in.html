@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img{
+            display: flex;
+            justify-content: center;
+        }
+        #container{
+            height:550px;
+            width: 350px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content:space-around;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+        }
+        .inpu{
+            height:40px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+        .divse{
+            display: flex;
+            flex-direction: column;
+            /* align-items: center; */
+            margin-top: 25px;
+            text-align:left;
+            /* border: 1px solid black; */
+        }
+        .label{
+            color: gray;
+            font-weight: 700;
+        }
+        button{
+            height:40px;
+            width: 300px;
+            border-radius: 5px;
+            background-color: rgb(238, 230, 230);
+            border: 0px;
+        }
+        button+button{
+            height:40px;
+            width: 300px;
+            border-radius: 5px;
+            background-color:white;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button+button>img{
+            height:30px;
+            width: 30px;
+        }
+        p{
+            font-size: 13px;
+            color: gray;
+        }
+        h2{
+            margin:0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="img">
+       <img src="https://sso.masaischool.com/brand_dark.svg" alt="">
+    </div>
+    <form id="container">
+        <h2>Sign In</h2>
+         <div class="divse">
+            <label for="" class="label">Email</label>
+            <input class="inpu" id="email" type="email">
+        </div>
+        <div class="divse">
+            <label for="" class="label">Password</label>
+            <input class="inpu" id="pwd" type="password">
+        </div>
+        <button id="butn">SIGN IN</button>
+        <button> <img src="https://cdn-icons.flaticon.com/png/512/2504/premium/2504739.png?token=exp=1651127398~hmac=4371a790770f2b7a652e49f00c80c2f6" alt=""> CONTINUE WITH GOOLE</button>
+        <p>Don't have an account?<a href="sign-up.html">Sing Up</a></p>
+    </form>
+</body>
+</html>
+<script>
+    document.querySelector("#butn").addEventListener("click",forsignin)
+
+    function forsignin(){
+        event.preventDefault();
+        var getinfo = JSON.parse(localStorage.getItem("information"));
+        var inputemali = document.querySelector("#email").value;
+        var inputpwd = document.querySelector("#pwd").value;
+        var count=0;
+        var count1 = 0;
+        var num = 0;
+        var pwd = 0;
+        var pwd2 = 0;
+        var count3 = 0;
+        var count2 = 0;
+        for(var j=0;j<getinfo.length;j++){
+            // console.log(getinfo[j])
+            if(getinfo[j]==inputemali){
+                pwd =(j)
+                count++
+            }
+            if(getinfo[j]!=inputemali){
+                count3++
+            }
+            if(getinfo[j]!=inputpwd){
+                count2++
+            }
+            
+            if(getinfo[j]==inputpwd){
+                pwd2 = (j)
+                count1++
+           }
+        }
+        if(count2==getinfo.length){
+            alert("please Enter valid passward")
+        }
+        if(count3==getinfo.length){
+            alert("please Enter valid email")
+        }
+        
+        if((pwd+1)==(pwd2)){
+            if(count>=1){
+                num++
+            }
+            if(count1>=1){
+                num++
+            }
+            if(num>=2){
+                alert("Sign in succsesfuly")
+                window.open("https://www.masaischool.com/")
+            }
+        }
+    }
+</script>
